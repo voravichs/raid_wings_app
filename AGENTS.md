@@ -2,8 +2,20 @@
 
 ## This is NOT the Next.js you know
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+# Project conventions
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+This project uses Next.js with the App Router.
+
+## Component placement
+- Keep components used by only one route in that route's `_components/` folder.
+- Put generic, reusable UI in `src/components/ui/` and shared layout
+  components in `src/components/layout/`.
+- Keep components shared within one feature in `src/features/<feature>/components/`.
+- Check for an existing component before creating a new one.
+
+## Server and Client Components
+- Prefer Server Components by default.
+- Add `"use client"` only where client-side behavior is needed, such as
+  event handlers, state, or browser APIs. Keep that boundary small.
 
 <!-- END:nextjs-agent-rules -->
