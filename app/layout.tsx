@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Lato, Bitter} from "next/font/google";
 import "./globals.css";
+import ThemeModeButton from "@/components/ui/ThemeModeButton";
+import { ThemeProvider } from "next-themes";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -26,8 +28,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${lato.variable} ${bitter.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="data-theme"
+          defaultTheme="system"
+          enableSystem
+          storageKey="raid-wings-theme"
+        >
+          {children}
+          <ThemeModeButton />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

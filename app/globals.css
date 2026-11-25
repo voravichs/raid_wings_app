@@ -2,13 +2,39 @@
 
 
 @theme {
-  --color-paper: #f6f2e7;
+  --color-paper: #f7f5ed;
   --color-ink: #172a35;
-  --color-accent: #356754;
   --color-sky-light: #78aef2;
   --color-sky: #3e8cec;
   --color-sky-dark: #2469bf;
+  --color-accent: #e8e5d9;
   --container-site: 72rem;
+}
+
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper: #101c24;
+  --color-ink: #f2f0e8;
+  --color-sky-dark: #78aef2;
+  --color-accent: #0b141a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --color-paper: #101c24;
+    --color-ink: #f2f0e8;
+    --color-sky-dark: #78aef2;
+    --color-accent: #0b141a;
+  }
 }
 
 @theme inline {
@@ -17,7 +43,23 @@
 }
 
 @layer base {
+  :root[data-theme-ready="true"],
+  :root[data-theme-ready="true"] body,
+  :root[data-theme-ready="true"] body * {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+  }
+
   body {
     @apply bg-paper font-sans text-ink;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme-ready="true"],
+  :root[data-theme-ready="true"] body,
+  :root[data-theme-ready="true"] body * {
+    transition-duration: 0ms !important;
   }
 }
